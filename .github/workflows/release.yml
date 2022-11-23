@@ -9,10 +9,13 @@ jobs:
   release:
     runs-on: ubuntu-latest
     steps:
+    
       - name: Checkout
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
         with:
           fetch-depth: 0
+          repository: ConnorsApps/netgear-nighthawk-metrics
+          path: charts/
 
       - name: Configure Git
         run: |
@@ -21,7 +24,5 @@ jobs:
 
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.4.1
-        with:
-          charts_repo_url: https://github.com/ConnorsApps/netgear-nighthawk-metrics
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
